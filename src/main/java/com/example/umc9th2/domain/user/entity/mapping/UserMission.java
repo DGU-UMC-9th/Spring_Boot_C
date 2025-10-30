@@ -1,7 +1,7 @@
 package com.example.umc9th2.domain.user.entity.mapping;
 
-import com.example.umcspringboot.domain.user.entity.User;
-import com.example.umcspringboot.domain.mission.entity.Mission;
+import com.example.umc9th2.domain.user.entity.User;
+import com.example.umc9th2.domain.mission.entity.Mission;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

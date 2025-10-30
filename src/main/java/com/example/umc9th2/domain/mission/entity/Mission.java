@@ -1,6 +1,6 @@
 package com.example.umc9th2.domain.mission.entity;
 
-import com.example.umcspringboot.domain.store.entity.Store;
+import com.example.umc9th2.domain.store.entity.Store;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

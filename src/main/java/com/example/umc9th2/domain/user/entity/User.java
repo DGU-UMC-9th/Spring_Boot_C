@@ -1,10 +1,10 @@
 package com.example.umc9th2.domain.user.entity;
 
-import com.example.umcspringboot.domain.user.entity.mapping.UserMission;
-import com.example.umcspringboot.domain.review.entity.Review;
-import com.example.umcspringboot.global.BaseEntity;
-import com.example.umcspringboot.domain.user.entity.mapping.UserTerm;
-import com.example.umcspringboot.domain.user.entity.mapping.UserFood;
+import com.example.umc9th2.domain.user.entity.mapping.UserMission;
+import com.example.umc9th2.domain.review.entity.Review;
+import com.example.umc9th2.global.BaseEntity;
+import com.example.umc9th2.domain.user.entity.mapping.UserTerm;
+import com.example.umc9th2.domain.user.entity.mapping.UserFood;
 
 import jakarta.persistence.*;
 import lombok.Getter;
