@@ -1,4 +1,4 @@
-package com.example.umc9th.domain.food.entity;
+package com.example.umc9th.domain.restaurants.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,8 +8,8 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@Table(name = "food_category")
-public class FoodCategory {
+@Table(name = "location")
+public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

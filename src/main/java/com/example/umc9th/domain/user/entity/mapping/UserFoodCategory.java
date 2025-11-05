@@ -1,6 +1,6 @@
 package com.example.umc9th.domain.user.entity.mapping;
 
-import com.example.umc9th.domain.food.entity.FoodCategory;
+import com.example.umc9th.domain.user.entity.FoodCategory;
 import com.example.umc9th.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;

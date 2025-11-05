@@ -1,4 +1,4 @@
-package com.example.umc9th.domain.terms.enums;
+package com.example.umc9th.domain.user.enums;
 
 public enum TermsEnum {
     AGE, SERVICE, PRIVACY, LOCATION, MARKETING

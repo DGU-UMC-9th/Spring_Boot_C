@@ -1,7 +1,6 @@
 package com.example.umc9th.domain.user.entity.mapping;
 
 import com.example.umc9th.domain.mission.entity.Mission;
-import com.example.umc9th.domain.terms.entity.Terms;
 import com.example.umc9th.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
