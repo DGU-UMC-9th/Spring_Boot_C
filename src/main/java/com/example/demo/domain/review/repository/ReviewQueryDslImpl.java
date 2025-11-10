@@ -15,7 +15,7 @@ import static com.example.demo.domain.store.entity.QStore.store;
 
 @Repository
 @RequiredArgsConstructor
-public class ReciewQueryDslImpl implements ReviewQueryDsl {
+public class ReviewQueryDslImpl implements ReviewQueryDsl {
     private final JPAQueryFactory queryFactory;
 
     QReview review =QReview.review;
