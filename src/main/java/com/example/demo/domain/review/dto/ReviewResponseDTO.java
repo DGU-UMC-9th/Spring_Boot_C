@@ -19,6 +19,9 @@ public class ReviewResponseDTO {
     private String content;
     private LocalDateTime createdAt;
 
+    public ReviewResponseDTO(Review review) {
+    }
+
 
     public static ReviewResponseDTO from(Review review) {
         return ReviewResponseDTO.builder()
