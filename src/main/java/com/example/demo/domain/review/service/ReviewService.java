@@ -3,12 +3,15 @@ package com.example.demo.domain.review.service;
 import com.example.demo.domain.review.dto.ReviewResponseDTO;
 import com.example.demo.domain.review.entity.Review;
 import com.example.demo.domain.review.repository.ReviewRepository;
+import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.example.demo.domain.review.entity.QReview.review;
 
 @Service
 @RequiredArgsConstructor
@@ -17,12 +20,18 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
 
-    public List<ReviewResponseDTO> getReviewsByStore(Long storeId) {
+    public List<Review> getMyReviews(Long currentUserId, Long filterStoreId, Float filterStarRating) {
 
-        List<Review> reviewList = reviewRepository.findAllByStoreIdWithMember(storeId);
+        BooleanBuilder builder = new BooleanBuilder();
 
-        return reviewList.stream()
-                .map(ReviewResponseDTO::from)
-                .collect(Collectors.toList());
+        builder.and(review.member.id.eq(currentUserId));
+
+        if(filterStoreId != null) {
+            builder.and(review.store.id.eq(filterStoreId));
+        }
+        if(filterStarRating != null) {
+            builder.and(review.star.eq(filterStarRating));
+        }
+        return reviewRepository.searchReview(builder);
     }
 }
