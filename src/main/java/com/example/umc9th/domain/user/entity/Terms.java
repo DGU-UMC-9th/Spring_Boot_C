@@ -1,6 +1,6 @@
-package com.example.umc9th.domain.terms.entity;
+package com.example.umc9th.domain.user.entity;
 
-import com.example.umc9th.domain.terms.enums.TermsEnum;
+import com.example.umc9th.domain.user.enums.TermsEnum;
 import jakarta.persistence.*;
 import lombok.*;
 

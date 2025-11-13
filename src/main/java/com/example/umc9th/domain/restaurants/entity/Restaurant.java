@@ -1,6 +1,5 @@
 package com.example.umc9th.domain.restaurants.entity;
 
-import com.example.umc9th.domain.location.entity.Location;
 import jakarta.persistence.*;
 import lombok.*;
 

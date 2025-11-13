@@ -1,7 +1,6 @@
 package com.example.umc9th.domain.mission.entity;
 
 import com.example.umc9th.domain.restaurants.entity.Restaurant;
-import com.example.umc9th.domain.terms.enums.TermsEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
