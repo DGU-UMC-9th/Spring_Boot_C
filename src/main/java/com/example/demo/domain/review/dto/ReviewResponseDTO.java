@@ -23,6 +23,7 @@ public class ReviewResponseDTO {
     }
 
 
+
     public static ReviewResponseDTO from(Review review) {
         return ReviewResponseDTO.builder()
                 .nickname(review.getMember().getName()) //
