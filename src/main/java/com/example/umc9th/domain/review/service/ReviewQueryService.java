@@ -1,5 +1,7 @@
 package com.example.umc9th.domain.review.service;
 
+import com.example.umc9th.domain.review.converter.ReviewConverter;
+import com.example.umc9th.domain.review.dto.ReviewSearchResDto;
 import com.example.umc9th.domain.review.entity.QReview;
 import com.example.umc9th.domain.review.entity.Review;
 import com.example.umc9th.domain.review.repository.ReviewRepository;
@@ -15,7 +17,7 @@ public class ReviewQueryService {
 
     private final ReviewRepository reviewRepository;
 
-    public List<Review> searchReview(String type, String query){
+    public ReviewSearchResDto searchReview(String type, String query){
         QReview review = QReview.review;
         BooleanBuilder builder = new BooleanBuilder();
 
@@ -40,6 +42,9 @@ public class ReviewQueryService {
             throw new IllegalArgumentException("type은 'restaurantId' 또는 'rating' 중 하나여야 합니다.");
         }
 
-        return reviewRepository.searchReview(builder);
+        List<Review> results = reviewRepository.searchReview(builder);
+
+        return ReviewConverter.toReviewSearchResDto(results);
+
     }
 }
