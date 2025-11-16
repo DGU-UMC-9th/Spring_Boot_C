@@ -1,13 +1,13 @@
 package com.example.umc9th.domain.review.entity;
 
 import com.example.umc9th.domain.restaurants.entity.Restaurant;
+import com.example.umc9th.domain.review.entity.mapping.ReviewImage;
 import com.example.umc9th.domain.user.entity.User;
-import com.example.umc9th.domain.user.enums.Gender;
 import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Builder
@@ -33,4 +33,7 @@ public class Review extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReviewImage> reviewImages;
 }
