@@ -33,13 +33,13 @@ public class ReviewQueryService {
 
         //  별점 필터
         if (type.equals("star") && star != null) {
-            builder.and(review.rating.goe(star.intValue()));
+            builder.and(review.rating.goe(star));
         }
 
         // 가게 + 별점 동시
         if (type.equals("both") && query != null && star != null) {
             builder.and(review.store.storeName.contains(query));
-            builder.and(review.rating.goe(star.intValue()));
+            builder.and(review.rating.goe(star));
         }
 
         // 최종 Predicate로 전달
