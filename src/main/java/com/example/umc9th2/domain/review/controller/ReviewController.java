@@ -17,10 +17,9 @@ public class ReviewController {
     @GetMapping("/search")
     public ResponseEntity<List<Review>> searchReviews(
             @RequestParam String type,
-            @RequestParam String query,
-            @RequestParam(required = false) Float star
+            @RequestParam String query
     ) {
-        List<Review> result = reviewQueryService.searchReview(type, query,star);
+        List<Review> result = reviewQueryService.searchReview(type, query);
         return ResponseEntity.ok(result);
     }
 }
