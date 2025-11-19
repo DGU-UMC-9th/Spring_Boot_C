@@ -25,7 +25,7 @@ public class ReviewQueryDslImpl implements ReviewQueryDsl {
 
         return queryFactory
                 .selectFrom(review)
-                .leftJoin(review.store, store)
+                .leftJoin(review.store, store).fetchJoin()
                 .where(predicate) //  BooleanBuilder가 Predicate로 전달됨
                 .fetch();
     }
