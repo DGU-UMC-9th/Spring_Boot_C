@@ -6,7 +6,7 @@ DGU-UMC 9기 Spring Boot 스터디 C조
 
 |               데이                |               포테                |               현                |               줄이                |
 | :-----------------------------------: | :-----------------------------------: | :-----------------------------------: | :-----------------------------------: |
-| [강서현](https://github.com/seohyunk09) | [김동현](https://github.com/wlgusqkr) | [류동현](https://github.com/wlgusqkr) | [장주리](https://github.com/wlgusqkr) |
+| [강서현](https://github.com/seohyunk09) | [김동현](https://github.com/wlgusqkr) | [류동현](https://github.com/fbehdgus906) | [장주리](https://github.com/wlgusqkr) |
 
 ## 📁 디렉토리 구조
 
