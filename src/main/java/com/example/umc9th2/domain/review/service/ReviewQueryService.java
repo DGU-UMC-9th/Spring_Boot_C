@@ -13,36 +13,42 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
 public class ReviewQueryService {
 
     private final ReviewRepository reviewRepository;
 
-    public List<Review> searchReview(String type, String query,Float star) {
+    public List<Review> searchReview(String type, String query) {
 
+        // Q클래스 정의
         QReview review = QReview.review;
-        QStore store = QStore.store;
+
+        // BooleanBuilder 정의
         BooleanBuilder builder = new BooleanBuilder();
 
-        // 가게명 필터
-        if (type.equals("store") && query != null) {
+        // 동적 쿼리 조건
+        if (type.equals("store")) {
             builder.and(review.store.storeName.contains(query));
         }
 
-        //  별점 필터
-        if (type.equals("star") && star != null) {
-            builder.and(review.rating.goe(star.intValue()));
+        if (type.equals("content")) {
+            builder.and(review.content.contains(query));
         }
 
-        // 가게 + 별점 동시
-        if (type.equals("both") && query != null && star != null) {
-            builder.and(review.store.storeName.contains(query));
-            builder.and(review.rating.goe(star.intValue()));
+        if (type.equals("both")) {
+            String[] queries = query.split("&");
+            String firstQuery = queries[0];   // storeName 검색값
+            String secondQuery = queries[1];  // content 검색값
+
+            builder.and(review.store.storeName.contains(firstQuery));
+            builder.and(review.content.contains(secondQuery));
         }
 
-        // 최종 Predicate로 전달
-        return reviewRepository.searchReview(builder);
+        // Repository 사용 & 결과 매핑
+        List<Review> reviewList = reviewRepository.searchReview(builder);
+
+        // return
+        return reviewList;
     }
 }
