@@ -10,9 +10,11 @@ import java.util.List;
 @Service
 public class UserMissionService {
     private final UserMissionRepository userMissionRepository;
+    
     public UserMissionService(UserMissionRepository userMissionRepository) {
         this.userMissionRepository = userMissionRepository;
     }
+    
     public List<MyMissionDTO> getMyMissions(Long userId, Pageable pageable) {
         return userMissionRepository.findMyMissions(userId, pageable);
     }

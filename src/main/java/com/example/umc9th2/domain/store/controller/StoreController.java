@@ -1,4 +1,5 @@
 package com.example.umc9th2.domain.store.controller;
+
 import com.example.umc9th2.domain.store.dto.req.StoreReqDTO;
 import com.example.umc9th2.domain.store.dto.res.StoreResDTO;
 import com.example.umc9th2.domain.store.service.StoreService;
@@ -13,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class StoreController {
     private final StoreService storeService;
-    //가게 생성 API 
+
+    //생성
     @PostMapping
     public ApiResponse<StoreResDTO.CreateStore> createStore(
             @RequestBody StoreReqDTO.CreateStore request
@@ -22,5 +24,4 @@ public class StoreController {
         StoreResDTO.CreateStore result = storeService.createStore(request);//가게 생성
         return ApiResponse.onSuccess(code, result);
     }
-
 }

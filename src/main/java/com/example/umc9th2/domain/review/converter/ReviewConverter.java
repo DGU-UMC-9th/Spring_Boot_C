@@ -1,27 +1,55 @@
 package com.example.umc9th2.domain.review.converter;
 
-import com.example.umc9th2.domain.review.dto.ReviewDTO;
+import com.example.umc9th2.domain.review.dto.res.ReviewSearchDTO;
+import com.example.umc9th2.domain.review.dto.req.ReviewReqDTO;
+import com.example.umc9th2.domain.review.dto.res.ReviewResDTO;
 import com.example.umc9th2.domain.review.entity.Review;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReviewConverter {
 
-    // Review 엔티티 -> ReviewDTO 변환
-    public static ReviewDTO toReviewDTO(Review review) {
-        return ReviewDTO.builder()
+public class ReviewConverter {
+   
+     //Review Entity -> ReviewSearchDTO
+     
+    public static ReviewSearchDTO toReviewSearchDTO(Review review) {
+        return ReviewSearchDTO.builder()
                 .reviewId(review.getReviewId())
-                .username(review.getUser() != null ? review.getUser().getUsername() : null)  // User 엔티티에서 username 추출
+                .username(review.getUser() != null ? review.getUser().getUsername() : null)
                 .rating(review.getRating())
                 .content(review.getContent())
-                .build();                                 // Builder로 ReviewDTO 객체 생성
+                .build();
     }
 
-    // Review 리스트 -> ReviewDTO 리스트 변환
-    public static List<ReviewDTO> toReviewDTOList(List<Review> reviewList) {
+    
+     //Review -> ReviewSearchDTO 리스트  
+     //조회
+    public static List<ReviewSearchDTO> toReviewSearchDTOList(List<Review> reviewList) {
         return reviewList.stream()
-                .map(ReviewConverter::toReviewDTO)       // 각 Review를 ReviewDTO로 변환
+                .map(ReviewConverter::toReviewSearchDTO)
                 .collect(Collectors.toList());
+    }
+
+    // 생성
+    // 요청 DTO->  Review Entity
+  
+    public static Review toReview(ReviewReqDTO.CreateReview request) {
+        Review review = new Review();
+        review.setRating(request.getRating());
+        review.setContent(request.getContent());
+        return review;
+    }
+
+    
+     //Review Entity -> 응답 DTO
+    public static ReviewResDTO.CreateReview toCreateReviewDTO(Review review) {
+        return ReviewResDTO.CreateReview.builder()
+                .reviewId(review.getReviewId())
+                .username(review.getUser() != null ? review.getUser().getUsername() : null)
+                .rating(review.getRating())
+                .content(review.getContent())
+                .storeName(review.getStore() != null ? review.getStore().getStoreName() : null)
+                .build();
     }
 }

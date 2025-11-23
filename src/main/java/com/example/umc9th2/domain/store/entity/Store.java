@@ -19,10 +19,11 @@ public class Store {
     @Column(nullable = false, length = 100)
     private String storeName;
 
-    @Column(length = 50)
+    @Column(nullable = false, length = 10)
     private String ownerPin;
 
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
 }
+
