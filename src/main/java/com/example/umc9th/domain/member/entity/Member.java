@@ -47,10 +47,10 @@ public class Member extends BaseEntity {
     @Column(name = "inactive_date")
     private LocalDateTime inactiveDate;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = true)
     private String email;
 
-    @Column(name = "phonenumber", nullable = false)
+    @Column(name = "phonenumber", nullable = true)
     private String phonenumber;
 
     @Column(name = "point")
