@@ -35,4 +35,6 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
             @Param("memberId") Long memberId,
             @Param("lastId") Long lastId
     );
+
+    boolean existsByMemberIdAndMissionId(Long memberId, Long missionId); // 해당 미션을 이미 도전 중인지 확인하기 위함
 }
