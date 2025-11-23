@@ -1,6 +1,7 @@
 package com.example.umc9th.domain.member.dto;
 
 import com.example.umc9th.domain.member.enums.Gender;
+import com.example.umc9th.global.annotation.ExistFoods;
 import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ public class MemberReqDTO {
             Gender gender,
             LocalDate birth,
             String address,
+            @ExistFoods
             List<Long> favoriteFood
     ){}
 }

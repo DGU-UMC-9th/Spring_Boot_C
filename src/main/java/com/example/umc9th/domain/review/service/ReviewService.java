@@ -26,7 +26,7 @@ public class ReviewService {
     private final StoreRepository storeRepository;   // Store repository
 
     // 리뷰 생성 메서드
-    public Review createReview(Long memberId, Long storeId, String content, Integer rating) {
+    public Review createReview(Long memberId, Long storeId, String content, Float rating) {
 
         // 외래키로 사용할 엔티티 조회
         Member member = memberRepository.findById(memberId)

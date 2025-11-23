@@ -1,16 +1,16 @@
 package com.example.umc9th.domain.review.controller;
 
 import com.example.umc9th.domain.review.converter.ReviewConverter;
+import com.example.umc9th.domain.review.dto.ReviewReqDto;
 import com.example.umc9th.domain.review.dto.ReviewResDto;
 import com.example.umc9th.domain.review.entity.Review;
+import com.example.umc9th.domain.review.service.ReviewCreateService;
 import com.example.umc9th.domain.review.service.ReviewService;
 import com.example.umc9th.global.apiPayload.ApiResponse;
 import com.example.umc9th.global.apiPayload.code.GeneralSuccessCode;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewController {
     private final ReviewService reviewQueryService;
+    private final ReviewCreateService reviewCreateService;
 
     // 워크북 예시
     @GetMapping("/search")
@@ -43,5 +44,15 @@ public class ReviewController {
         GeneralSuccessCode code = GeneralSuccessCode.OK;
         List<ReviewResDto> dtoList = ReviewConverter.toReviewListDto(reviewList);
         return ApiResponse.onSuccess(dtoList);
+    }
+
+    // 가게에 리뷰 추가
+    @PostMapping("/{storeId}")
+    public ApiResponse<ReviewResDto.CreateReviewResultDto> createReview(
+            @PathVariable Long storeId,
+            @RequestBody @Valid ReviewReqDto.JoinDto request
+    ) {
+        Review review = reviewCreateService.createReview(storeId, request);
+        return ApiResponse.onSuccess(ReviewConverter.toCreateReviewResultDto(review));
     }
 }
