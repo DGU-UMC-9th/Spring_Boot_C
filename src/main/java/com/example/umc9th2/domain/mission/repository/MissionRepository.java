@@ -1,7 +1,7 @@
 package com.example.umc9th2.domain.mission.repository;
 
 
-import com.example.umc9th2.domain.mission.dto.HomeMission;
+import com.example.umc9th2.domain.mission.dto.res.HomeMissionResDTO;
 import com.example.umc9th2.domain.mission.entity.Mission;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -9,10 +9,10 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface MissionRepository extends JpaRepository<Mission, Long> {
+public interface MissionRepository extends JpaRepository<Mission,Long> {
 
     @Query("""
-select new com.example.umc9th2.domain.mission.dto.HomeMission(
+select new com.example.umc9th2.domain.mission.dto.res.HomeMissionResDTO(
     m.missionId,
     m.title,
     m.description,
@@ -23,12 +23,12 @@ select new com.example.umc9th2.domain.mission.dto.HomeMission(
 from Mission m
 join m.store s
 join s.region r
-left join UserMission um 
+left join UserMission um
    on um.mission.missionId = m.missionId and um.user.userId = :userId
 where r.regionId = :regionId and m.isActive = true
 order by m.missionId desc
 """)
-    List<HomeMission> findHomeMissions(
+    List<HomeMissionResDTO> findHomeMissions(
             @Param("userId") Long userId,
             @Param("regionId") Long regionId,
             Pageable pageable

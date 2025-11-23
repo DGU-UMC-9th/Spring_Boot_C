@@ -1,7 +1,7 @@
 package com.example.umc9th2.domain.mission.controller;
 
-import com.example.umc9th2.domain.mission.dto.HomeMission;
 import com.example.umc9th2.domain.mission.dto.req.MissionReqDTO;
+import com.example.umc9th2.domain.mission.dto.res.HomeMissionResDTO;
 import com.example.umc9th2.domain.mission.dto.res.MissionResDTO;
 import com.example.umc9th2.domain.mission.service.MissionService;
 import com.example.umc9th2.global.apiPayload.ApiResponse;
@@ -23,7 +23,7 @@ public class MissionController {
     }
 //홈화면목록조회
     @GetMapping("/home")
-    public List<HomeMission> getHomeMissions(
+    public List<HomeMissionResDTO> getHomeMissions(
             @RequestParam Long userId,
             @RequestParam Long regionId,
             @RequestParam(defaultValue = "0") int page,
