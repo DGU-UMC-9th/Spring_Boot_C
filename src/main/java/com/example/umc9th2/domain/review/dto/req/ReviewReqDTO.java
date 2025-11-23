@@ -8,6 +8,7 @@ import lombok.Getter;
 public class ReviewReqDTO {
 
 
+    @Getter
     public static class CreateReview {
         private Integer rating;   // 평점
         private String content;
