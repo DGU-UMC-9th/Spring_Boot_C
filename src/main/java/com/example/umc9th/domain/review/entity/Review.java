@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
+@Setter
 @Table(name = "review")
 public class Review extends BaseEntity {
 
@@ -26,7 +27,7 @@ public class Review extends BaseEntity {
     private String content;
 
     @Column(name = "rating", nullable = false)
-    private Integer rating;
+    private Float rating;
 
     // Member(1) : Review(N) 관계
     @ManyToOne(fetch = FetchType.LAZY)
