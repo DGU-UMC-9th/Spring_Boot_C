@@ -26,6 +26,6 @@ public class ReviewController {
             @RequestParam String query
     ) {
         ReviewSearchResDto result = reviewQueryService.searchReview(type, query);
-        return ResponseEntity.ok(ApiResponse.success(SuccessCode.REVIEW_SEARCHED, result));
+        return ResponseEntity.ok(ApiResponse.success(SuccessCode.READ_SUCCESS, result));
     }
 }
