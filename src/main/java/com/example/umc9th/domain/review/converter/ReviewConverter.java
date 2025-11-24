@@ -1,9 +1,12 @@
 package com.example.umc9th.domain.review.converter;
 
+import com.example.umc9th.domain.restaurants.entity.Restaurant;
+import com.example.umc9th.domain.review.dto.ReviewCreateReqDto;
 import com.example.umc9th.domain.review.dto.ReviewDetailDto;
 import com.example.umc9th.domain.review.dto.ReviewSearchResDto;
 import com.example.umc9th.domain.review.entity.Review;
 import com.example.umc9th.domain.review.entity.mapping.ReviewImage;
+import com.example.umc9th.domain.user.entity.User;
 
 import java.util.List;
 
@@ -49,5 +52,15 @@ public class ReviewConverter {
         return images.stream()
                 .map(ReviewImage::getImgUrl)
                 .toList();
+    }
+
+    /** ReviewCreateReqDto → Review */
+    public static Review toReview(ReviewCreateReqDto reqDto, User user, Restaurant restaurant) {
+        return Review.builder()
+                .user(user)
+                .rating(reqDto.getRating())
+                .content(reqDto.getContent())
+                .restaurant(restaurant)
+                .build();
     }
 }

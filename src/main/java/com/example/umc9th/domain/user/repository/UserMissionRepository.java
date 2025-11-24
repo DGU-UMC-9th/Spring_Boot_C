@@ -1,7 +1,9 @@
 package com.example.umc9th.domain.user.repository;
 
 
+import com.example.umc9th.domain.mission.entity.Mission;
 import com.example.umc9th.domain.user.dto.UserMissionResDto;
+import com.example.umc9th.domain.user.entity.User;
 import com.example.umc9th.domain.user.entity.mapping.UserMission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,4 +53,5 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long> 
             @Param("userId") Long userId,
             Pageable pageable);
 
+    boolean existsByUserAndMissionAndIsDone(User user, Mission mission, boolean isDone);
 }
