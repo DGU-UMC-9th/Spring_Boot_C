@@ -1,7 +1,10 @@
 package com.example.umc9th.domain.review.controller;
 
+import com.example.umc9th.domain.review.dto.ReviewSearchResDto;
 import com.example.umc9th.domain.review.entity.Review;
 import com.example.umc9th.domain.review.service.ReviewQueryService;
+import com.example.umc9th.global.apiPayload.ApiResponse;
+import com.example.umc9th.global.apiPayload.code.SuccessCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +21,11 @@ public class ReviewController {
     private final ReviewQueryService reviewQueryService;
 
     @GetMapping("/search")
-    public ResponseEntity<List<Review>> searchReviews(
+    public ResponseEntity<ApiResponse<ReviewSearchResDto>> searchReviews(
             @RequestParam String type,
             @RequestParam String query
     ) {
-        List<Review> result = reviewQueryService.searchReview(type, query);
-        return ResponseEntity.ok(result);
+        ReviewSearchResDto result = reviewQueryService.searchReview(type, query);
+        return ResponseEntity.ok(ApiResponse.success(SuccessCode.REVIEW_SEARCHED, result));
     }
 }
