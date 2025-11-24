@@ -26,6 +26,16 @@ public enum GeneralErrorCode implements BaseErrorCode{
             "USER404_1",
             "존재하지 않는 사용자입니다."),
 
+    // restaurant 관련
+    RESTAURANT_NOT_FOUND(HttpStatus.NOT_FOUND,
+            "RESTAURANT404_1",
+            "존재하지 않는 음식점입니다."),
+
+    // location 관련
+    LOCATION_NOT_FOUND(HttpStatus.NOT_FOUND,
+            "LOCATION404_1",
+            "존재하지 않는 지역입니다."),
+
 
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR,
             "COMMON500_1",

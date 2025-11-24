@@ -13,6 +13,10 @@ public class ApiResponse<T> {
     private String message;
     private T data;
 
+    public static <T> ApiResponse<T> onSuccess(SuccessCode code, T data) {
+        return new ApiResponse<>(true, code.getCode(), code.getMessage(), data);
+    }
+
     public static <T> ApiResponse<T> onSuccess(SuccessCode code) {
         return new ApiResponse<>(true, code.getCode(), code.getMessage(), null);
     }
