@@ -48,17 +48,15 @@ public class MemberCommandServiceImpl implements MemberCommandService {
                 Food food = foodRepository.findById(id)
                         .orElseThrow(() -> new FoodException(FoodErrorCode.Food_NOT_FOUND));
 
-                // MemberFood 엔티티 생성 (컨버터 사용해야 함)
                 MemberFood memberFood = MemberFood.builder()
                         .member(member)
                         .food(food)
                         .build();
 
-                // 사용자 - 음식 (선호 음식) 추가
                 memberFoodList.add(memberFood);
             }
 
-            // 모든 선호 음식 추가: DB 적용
+            //DB 적용
             memberFoodRepository.saveAll(memberFoodList);
         }
         return MemberConverter.toJoinDTO(member);
