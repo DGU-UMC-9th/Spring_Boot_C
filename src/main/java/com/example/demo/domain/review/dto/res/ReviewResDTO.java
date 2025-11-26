@@ -38,5 +38,15 @@ public class ReviewResDTO {
     }
 
 
+    @Builder
+    @Getter
+    public static class ReviewCreateResultDTO {
+        private Long reviewId;
+        private LocalDateTime createdAt;
+    }
+
+
+
+
 
 }

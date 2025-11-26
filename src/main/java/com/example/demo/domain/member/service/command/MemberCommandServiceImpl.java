@@ -1,0 +1,64 @@
+package com.example.demo.domain.member.service.command;
+
+import com.example.demo.domain.food.entity.Food;
+import com.example.demo.domain.food.exception.FoodException;
+import com.example.demo.domain.food.exception.code.FoodErrorCode;
+import com.example.demo.domain.food.repository.FoodRepository;
+import com.example.demo.domain.member.converter.MemberConverter;
+import com.example.demo.domain.member.dto.req.MemberReqDTO;
+import com.example.demo.domain.member.dto.res.MemberResDTO;
+import com.example.demo.domain.member.entity.Member;
+import com.example.demo.domain.member.entity.mapping.MemberFood;
+import com.example.demo.domain.member.repository.MemberFoodRepository;
+import com.example.demo.domain.member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class MemberCommandServiceImpl implements MemberCommandService {
+
+    private final MemberRepository memberRepository;
+    private final MemberFoodRepository memberFoodRepository;
+    private final FoodRepository foodRepository;
+
+    // 회원가입
+    @Override
+    @Transactional
+    public MemberResDTO.JoinDTO signup(
+            MemberReqDTO.JoinDTO dto
+    ) {
+        // 사용자 생성
+        Member member = MemberConverter.toMember(dto);
+        // DB 적용
+        memberRepository.save(member);
+
+        // 선호 음식 존재 여부 확인
+        if (dto.preferCategory().size() > 1) {
+            List<MemberFood> memberFoodList = new ArrayList<>();
+
+            // 선호 음식 ID별 조회
+            for (Long id : dto.preferCategory()) {
+
+                // 음식 존재 여부 검증
+                Food food = foodRepository.findById(id)
+                        .orElseThrow(() -> new FoodException(FoodErrorCode.Food_NOT_FOUND));
+
+                MemberFood memberFood = MemberFood.builder()
+                        .member(member)
+                        .food(food)
+                        .build();
+
+                memberFoodList.add(memberFood);
+            }
+
+            //DB 적용
+            memberFoodRepository.saveAll(memberFoodList);
+        }
+        return MemberConverter.toJoinDTO(member);
+    }
+}

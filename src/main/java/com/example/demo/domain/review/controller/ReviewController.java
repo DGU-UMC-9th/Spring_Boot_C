@@ -2,15 +2,15 @@ package com.example.demo.domain.review.controller;
 
 
 import com.example.demo.domain.review.converter.ReviewConverter;
+import com.example.demo.domain.review.dto.req.ReviewReqDTO;
 import com.example.demo.domain.review.dto.res.ReviewResDTO;
+import com.example.demo.domain.review.entity.Review;
+import com.example.demo.domain.review.service.command.ReviewCommandService;
 import com.example.demo.domain.review.service.query.ReviewQueryService;
 import com.example.demo.global.apiPayload.ApiResponse;
 import com.example.demo.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +19,7 @@ import java.util.List;
 @RequestMapping("/reviews")
 public class ReviewController {
     private final ReviewQueryService reviewQueryService;
+    private final ReviewCommandService reviewCommandService;
 
     @GetMapping("/my")
     public ApiResponse<List<ReviewResDTO.ReviewResponse>> getMyReviews(
@@ -43,6 +44,17 @@ public class ReviewController {
         return ApiResponse.onSuccess(code,exceptionDto);
     }
 
+
+    @PostMapping("/post")
+    public ApiResponse<ReviewResDTO.ReviewCreateResultDTO> createReview(
+            @RequestBody ReviewReqDTO.ReviewRegisterDTO request) {
+
+        // 서비스 실행
+        Review review = reviewCommandService.createReview(request);
+        GeneralSuccessCode code = GeneralSuccessCode.OK;
+        // 결과 반환
+        return ApiResponse.onSuccess(code,ReviewConverter.toCreateResultDTO(review));
+    }
 
 }
 
