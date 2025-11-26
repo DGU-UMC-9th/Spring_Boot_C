@@ -5,6 +5,7 @@ import com.example.umc9th2.domain.user.dto.res.UserMissionResDTO;
 import com.example.umc9th2.domain.user.service.UserMissionService;
 import com.example.umc9th2.global.apiPayload.ApiResponse;
 import com.example.umc9th2.global.apiPayload.code.GeneralSuccessCode;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/my-missions")
+@RequiredArgsConstructor
 public class UserMissionController {
 
     private final UserMissionService userMissionService;
-    public UserMissionController(UserMissionService userMissionService) {
-        this.userMissionService = userMissionService;
-    }
 
     @GetMapping
     public List<MyMissionDTO> getMyMissions(

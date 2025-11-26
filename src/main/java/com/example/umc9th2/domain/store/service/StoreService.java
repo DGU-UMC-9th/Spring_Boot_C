@@ -11,29 +11,21 @@ import org.springframework.stereotype.Service;
 
 
 @Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class StoreService {
     private final StoreRepository storeRepository;
     private final RegionRepository regionRepository;
 
-    public StoreService(StoreRepository storeRepository, RegionRepository regionRepository) {
-        this.storeRepository = storeRepository;
-        this.regionRepository = regionRepository;
-    }
+    @Transactional
+    public Store createStore(StoreReqDTO.CreateStore request) {
 
-   
-    public StoreResDTO.CreateStore createStore(StoreReqDTO.CreateStore request) {
-       
         Region region = regionRepository.findById(request.getRegionId())
-                .orElseThrow(() -> new IllegalArgumentException("Region not found")); //조회 
+                .orElseThrow(() -> new IllegalArgumentException("Region not found"));
 
-      
-        Store store = StoreConverter.toStore(request);  // 2. DTO-> Entity
-
-    
+        Store store = StoreConverter.toStore(request);
         store.setRegion(region);
-        Store savedStore = storeRepository.save(store); // DB 저장ㄹ
-
-        return StoreConverter.toCreateStoreDTO(savedStore); // Entity-> DTO
+        return storeRepository.save(store);
     }
 }
 

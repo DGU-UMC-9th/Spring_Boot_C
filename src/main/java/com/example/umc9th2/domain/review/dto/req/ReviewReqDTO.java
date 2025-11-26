@@ -1,17 +1,18 @@
 package com.example.umc9th2.domain.review.dto.req;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-//리뷰 생성 요청
 @Getter
 public class ReviewReqDTO {
 
-
     @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class CreateReview {
-        private Integer rating;   // 평점
+        private Integer rating;
         private String content;
-        private Long storeId;     // 가게 ID
+        private Long storeId;
     }
 }

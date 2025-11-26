@@ -1,13 +1,16 @@
 package com.example.umc9th2.domain.mission.dto.res;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-//미션 응답 DTO
 public class MissionResDTO {
 
     @Builder
     @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class CreateMission {
         private Long missionId;
         private String title;

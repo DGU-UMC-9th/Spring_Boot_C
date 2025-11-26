@@ -1,13 +1,16 @@
 package com.example.umc9th2.domain.store.controller;
 
 import com.example.umc9th2.domain.store.dto.req.StoreReqDTO;
-import com.example.umc9th2.domain.store.dto.res.StoreResDTO;
+import com.example.umc9th2.domain.store.entity.Store;
 import com.example.umc9th2.domain.store.service.StoreService;
 import com.example.umc9th2.global.apiPayload.ApiResponse;
 import com.example.umc9th2.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/stores")
@@ -15,13 +18,11 @@ import org.springframework.web.bind.annotation.*;
 public class StoreController {
     private final StoreService storeService;
 
-    //생성
     @PostMapping
-    public ApiResponse<StoreResDTO.CreateStore> createStore(
-            @RequestBody StoreReqDTO.CreateStore request
-    ) {
-        GeneralSuccessCode code = GeneralSuccessCode.CREATED;
-        StoreResDTO.CreateStore result = storeService.createStore(request);//가게 생성
-        return ApiResponse.onSuccess(code, result);
+    public ResponseEntity<ApiResponse<Long>> createStore(@RequestBody StoreReqDTO.CreateStore request) {
+        Store newStore = storeService.createStore(request);
+        return ResponseEntity
+                .status(GeneralSuccessCode.CREATED.getStatus())
+                .body(ApiResponse.onSuccess(GeneralSuccessCode.CREATED, newStore.getStoreId()));
     }
 }

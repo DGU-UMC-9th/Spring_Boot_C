@@ -9,25 +9,19 @@ import com.example.umc9th2.domain.store.entity.Store;
 import com.example.umc9th2.domain.store.repository.StoreRepository;
 import com.example.umc9th2.domain.user.entity.User;
 import com.example.umc9th2.domain.user.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class ReviewCommandService {
 
     private final ReviewRepository reviewRepository;
     private final StoreRepository storeRepository;
     private final UserRepository userRepository;
 
-    public ReviewCommandService(ReviewRepository reviewRepository,
-                                StoreRepository storeRepository,
-                                UserRepository userRepository) {
-        this.reviewRepository = reviewRepository;
-        this.storeRepository = storeRepository;
-        this.userRepository = userRepository;
-    }
-
-  
     @Transactional
     public ReviewResDTO.CreateReview createReview(ReviewReqDTO.CreateReview request) {
         //하드 코딩한 유저 

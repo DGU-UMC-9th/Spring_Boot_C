@@ -1,15 +1,18 @@
 package com.example.umc9th2.domain.user.dto.res;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
 public class UserMissionResDTO {
-// 미션 도전 응답 데이터
+
     @Builder
     @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class ChallengeMission {
         private Long userMissionId;
         private Long missionId;

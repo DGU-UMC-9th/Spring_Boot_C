@@ -1,16 +1,19 @@
 package com.example.umc9th2.domain.store.dto.res;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-//생성 응답
 public class StoreResDTO {
     @Builder
     @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class CreateStore {
-        private Long storeId;       
-        private String storeName;   
-        private String regionName;  
+        private Long storeId;
+        private String storeName;
+        private String regionName;
     }
 }
 

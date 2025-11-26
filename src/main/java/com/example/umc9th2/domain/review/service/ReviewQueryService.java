@@ -7,13 +7,13 @@ import com.example.umc9th2.domain.review.repository.ReviewRepository;
 import com.example.umc9th2.domain.store.entity.QStore;
 import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ReviewQueryService {
 

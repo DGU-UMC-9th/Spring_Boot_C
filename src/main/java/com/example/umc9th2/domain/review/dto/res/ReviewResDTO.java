@@ -8,6 +8,8 @@ public class ReviewResDTO {
 
     @Builder
     @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class CreateReview {
         private Long reviewId;
         private String username;  // 하드코딩된 유저

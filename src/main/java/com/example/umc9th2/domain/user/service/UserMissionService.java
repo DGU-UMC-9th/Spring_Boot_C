@@ -9,6 +9,7 @@ import com.example.umc9th2.domain.user.repository.UserRepository;
 import com.example.umc9th2.domain.user.converter.UserMissionConverter;
 import com.example.umc9th2.domain.mission.entity.Mission;
 import com.example.umc9th2.domain.mission.repository.MissionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,19 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class UserMissionService {
     private final UserMissionRepository userMissionRepository;
     private final UserRepository userRepository;
     private final MissionRepository missionRepository;
-
-
-    public UserMissionService(UserMissionRepository userMissionRepository,
-                              UserRepository userRepository,
-                              MissionRepository missionRepository) {
-        this.userMissionRepository = userMissionRepository;
-        this.userRepository = userRepository;
-        this.missionRepository = missionRepository;
-    }
 
     public List<MyMissionDTO> getMyMissions(Long userId, Pageable pageable) {
         return userMissionRepository.findMyMissions(userId, pageable);
