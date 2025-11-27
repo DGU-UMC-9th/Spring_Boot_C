@@ -1,19 +1,10 @@
 package com.example.umc9th2.domain.store.dto.req;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+//record 로 바꿈 
 
-@Getter
-public class StoreReqDTO {
-
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class CreateStore {
-        private String storeName;
-        private String ownerPin;
-        private Long regionId;
-    }
-}
+public record StoreReqDTO(
+        String storeName,
+        String ownerPin,
+        Long regionId
+) {}
 

@@ -7,8 +7,9 @@ import com.example.umc9th2.domain.store.entity.Store;
 import com.example.umc9th2.domain.store.repository.RegionRepository;
 import com.example.umc9th2.domain.store.repository.StoreRepository;
 import com.example.umc9th2.domain.store.converter.StoreConverter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true)
@@ -18,9 +19,9 @@ public class StoreService {
     private final RegionRepository regionRepository;
 
     @Transactional
-    public Store createStore(StoreReqDTO.CreateStore request) {
+    public Store createStore(StoreReqDTO request) {
 
-        Region region = regionRepository.findById(request.getRegionId())
+        Region region = regionRepository.findById(request.regionId())
                 .orElseThrow(() -> new IllegalArgumentException("Region not found"));
 
         Store store = StoreConverter.toStore(request);

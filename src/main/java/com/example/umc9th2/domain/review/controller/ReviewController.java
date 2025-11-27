@@ -37,11 +37,12 @@ public class ReviewController {
     //생성
     @PostMapping
     public ApiResponse<ReviewResDTO.CreateReview> createReview(
-            @RequestBody ReviewReqDTO.CreateReview request
+            @RequestBody ReviewReqDTO.CreateReview request,
+            @RequestParam Long userId
     ) {
  
         GeneralSuccessCode code = GeneralSuccessCode.CREATED;
-        ReviewResDTO.CreateReview result = reviewCommandService.createReview(request);
+        ReviewResDTO.CreateReview result = reviewCommandService.createReview(request, userId);
         return ApiResponse.onSuccess(code, result);
     }
 }

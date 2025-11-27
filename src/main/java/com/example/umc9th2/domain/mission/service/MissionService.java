@@ -1,6 +1,5 @@
 package com.example.umc9th2.domain.mission.service;
 
-
 import com.example.umc9th2.domain.mission.dto.req.MissionReqDTO;
 import com.example.umc9th2.domain.mission.entity.Mission;
 import com.example.umc9th2.domain.mission.repository.MissionRepository;
@@ -20,7 +19,7 @@ public class MissionService {
 
     @Transactional
     public Mission createMission(MissionReqDTO request) {
-        Store store = storeRepository.findById(request.getStoreId())
+        Store store = storeRepository.findById(request.storeId())
                 .orElseThrow(() -> new IllegalArgumentException("Store not found"));
 
         Mission mission = MissionConverter.toMission(request, store);

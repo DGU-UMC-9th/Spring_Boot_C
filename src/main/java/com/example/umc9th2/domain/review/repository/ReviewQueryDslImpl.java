@@ -15,7 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewQueryDslImpl implements ReviewQueryDsl {
 
-    private final EntityManager em;
+    private final EntityManager em; //DB 접근용
+    
 
     @Override
     public List<Review> searchReview(Predicate predicate) {

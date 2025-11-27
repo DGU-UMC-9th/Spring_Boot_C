@@ -1,20 +1,15 @@
 package com.example.umc9th2.domain.review.dto.res;
+//record 로 변경
+import java.time.LocalDateTime;
 
-import lombok.Builder;
-import lombok.Getter;
-
-//리뷰 생성 응답
 public class ReviewResDTO {
 
-    @Builder
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class CreateReview {
-        private Long reviewId;
-        private String username;  // 하드코딩된 유저
-        private Integer rating;
-        private String content;
-        private String storeName;
-    }
+    public record CreateReview(
+            Long reviewId,
+            String username,
+            Integer rating,
+            String content,
+            String storeName,
+            LocalDateTime createdAt
+    ) {}
 }

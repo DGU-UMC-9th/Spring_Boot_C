@@ -3,6 +3,7 @@ package com.example.umc9th2.domain.review.entity;
 import com.example.umc9th2.domain.user.entity.User;
 import com.example.umc9th2.domain.store.entity.Store;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
 public class Review {
 
     @Id

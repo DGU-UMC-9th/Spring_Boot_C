@@ -20,16 +20,16 @@ public class UserMission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userMissionId;
 
-    @ManyToOne
+    @ManyToOne 
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
+    @ManyToOne 
     @JoinColumn(name = "mission_id")
     private Mission mission;
 
-    @Column(length = 30)
-    private String status = "IN_PROGRESS";
+    @Column(nullable = false)
+    private boolean status = false;
 
     private LocalDateTime clearedAt;
 }

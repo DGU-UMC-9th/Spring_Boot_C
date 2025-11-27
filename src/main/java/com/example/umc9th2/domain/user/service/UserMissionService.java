@@ -51,7 +51,7 @@ public class UserMissionService {
 
         userMission.setUser(user);
         userMission.setMission(mission);
-        userMission.setStatus("IN_PROGRESS");
+        userMission.setStatus(false);
         UserMission savedUserMission = userMissionRepository.save(userMission);
         return UserMissionConverter.toChallengeMissionDTO(savedUserMission);
     }

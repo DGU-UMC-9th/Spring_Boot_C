@@ -19,7 +19,9 @@ public class StoreController {
     private final StoreService storeService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<Long>> createStore(@RequestBody StoreReqDTO.CreateStore request) {
+    public ResponseEntity<ApiResponse<Long>> createStore(
+        @RequestBody StoreReqDTO request
+    ) {
         Store newStore = storeService.createStore(request);
         return ResponseEntity
                 .status(GeneralSuccessCode.CREATED.getStatus())

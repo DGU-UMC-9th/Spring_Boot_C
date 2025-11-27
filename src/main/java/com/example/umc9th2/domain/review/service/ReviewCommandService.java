@@ -7,38 +7,39 @@ import com.example.umc9th2.domain.review.repository.ReviewRepository;
 import com.example.umc9th2.domain.review.converter.ReviewConverter;
 import com.example.umc9th2.domain.store.entity.Store;
 import com.example.umc9th2.domain.store.repository.StoreRepository;
+import com.example.umc9th2.domain.store.exception.code.StoreErrorCode;
 import com.example.umc9th2.domain.user.entity.User;
 import com.example.umc9th2.domain.user.repository.UserRepository;
+import com.example.umc9th2.domain.user.exception.code.UserErrorCode;
+import com.example.umc9th2.global.apiPayload.exception.GeneralException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Transactional
 public class ReviewCommandService {
 
     private final ReviewRepository reviewRepository;
     private final StoreRepository storeRepository;
     private final UserRepository userRepository;
 
-    @Transactional
-    public ReviewResDTO.CreateReview createReview(ReviewReqDTO.CreateReview request) {
-        //하드 코딩한 유저 
-        User user = userRepository.findAll().stream()
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    public ReviewResDTO.CreateReview createReview(
+            ReviewReqDTO.CreateReview request,
+            Long userId
+    ) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new GeneralException(UserErrorCode.USER_NOT_FOUND));
 
-        
-        Store store = storeRepository.findById(request.getStoreId())
-                .orElseThrow(() -> new IllegalArgumentException("Store not found"));// Store 조회
+        Store store = storeRepository.findById(request.storeId())
+                .orElseThrow(() -> new GeneralException(StoreErrorCode.NOT_FOUND));
 
-       
-        Review review = ReviewConverter.toReview(request); // DTO->Entity
-        review.setUser(user);    
-        review.setStore(store);   
-        Review savedReview = reviewRepository.save(review); // DB저장
-        return ReviewConverter.toCreateReviewDTO(savedReview); // Entity->DTO
+        Review review = ReviewConverter.toEntity(request, user, store);
+
+        reviewRepository.save(review);
+
+        return ReviewConverter.toCreateReviewResultDto(review);
     }
 }
 
