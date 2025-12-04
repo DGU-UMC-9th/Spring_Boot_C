@@ -7,8 +7,8 @@ public record MyMissionDTO(
         String title,
         String description,
         Integer rewardPoints,
-        String status,
-        LocalDateTime clearedAt,
+        boolean status,    // String에서 바꿈
+        LocalDateTime clearedAt,        LocalDateTime clearedAt,
         String storeName,
         String regionName
 ) {}

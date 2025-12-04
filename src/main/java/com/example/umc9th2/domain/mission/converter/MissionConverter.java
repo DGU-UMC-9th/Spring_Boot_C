@@ -29,4 +29,17 @@ public class MissionConverter {
                 mission.getStore().getStoreName()
         );
     }
+
+// 미션목록반환 
+public static List<MissionResDTO.MissionList> toMissionListDTO(List<Mission> missionList) {
+    return missionList.stream()
+            .map(mission -> new MissionResDTO.MissionList(
+                    mission.getMissionId(),
+                    mission.getTitle(),
+                    mission.getDescription(),
+                    mission.getRewardPoints(),
+                    mission.getIsActive()
+            ))
+            .toList();
+}
 }

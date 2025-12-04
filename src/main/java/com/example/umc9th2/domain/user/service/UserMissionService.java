@@ -27,6 +27,11 @@ public class UserMissionService {
     public List<MyMissionDTO> getMyMissions(Long userId, Pageable pageable) {
         return userMissionRepository.findMyMissions(userId, pageable);
     }
+    
+    public Page<MyMissionDTO> getInProgressMissions(Long userId, Pageable pageable) {
+        return userMissionRepository.findInProgressMissions(userId, pageable);
+    }
+
 //미션 도전
 
     @Transactional

@@ -29,4 +29,26 @@ where um.user.userId = :userId
 order by um.status asc, um.clearedAt desc
 """)
     List<MyMissionDTO> findMyMissions(@Param("userId") Long userId, Pageable pageable);
+    @Query("""
+        select new com.example.umc9th2.domain.user.dto.MyMissionDTO(
+            m.missionId,
+            m.title,
+            m.description,
+            m.rewardPoints,
+            um.status,
+            um.clearedAt,
+            s.storeName,
+            rg.regionName
+        )
+        from UserMission um
+        join um.mission m
+        join m.store s
+        join s.region rg
+        where um.user.userId = :userId
+          and um.status = false
+        order by um.clearedAt desc
+        """)
+        Page<MyMissionDTO> findInProgressMissions(@Param("userId") Long userId, Pageable pageable);
+
+
 }
