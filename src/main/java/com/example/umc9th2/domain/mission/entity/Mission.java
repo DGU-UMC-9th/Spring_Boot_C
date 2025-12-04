@@ -27,9 +27,10 @@ public class Mission {
     private Integer rewardPoints;
 
     @Column(nullable = false)
-    private Boolean isActive = true;
+    private Boolean isActive = true; // 미션활성화여부
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
 }
+

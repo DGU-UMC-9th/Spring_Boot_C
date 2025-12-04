@@ -1,21 +1,29 @@
 package com.example.umc9th2.domain.mission.service;
 
-
-import com.example.umc9th2.domain.mission.dto.HomeMission;
+import com.example.umc9th2.domain.mission.dto.req.MissionReqDTO;
+import com.example.umc9th2.domain.mission.entity.Mission;
 import com.example.umc9th2.domain.mission.repository.MissionRepository;
-import org.springframework.data.domain.Pageable;
+import com.example.umc9th2.domain.mission.converter.MissionConverter;
+import com.example.umc9th2.domain.store.entity.Store;
+import com.example.umc9th2.domain.store.repository.StoreRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class MissionService {
     private final MissionRepository missionRepository;
-    public MissionService(MissionRepository missionRepository) {
-        this.missionRepository = missionRepository;
-    }
+    private final StoreRepository storeRepository;
 
-    public List<HomeMission> getHomeMissions(Long userId, Long regionId, Pageable pageable) {
-        return missionRepository.findHomeMissions(userId, regionId, pageable);
+    @Transactional
+    public Mission createMission(MissionReqDTO request) {
+        Store store = storeRepository.findById(request.storeId())
+                .orElseThrow(() -> new IllegalArgumentException("Store not found"));
+
+        Mission mission = MissionConverter.toMission(request, store);
+
+        return missionRepository.save(mission);
     }
 }
