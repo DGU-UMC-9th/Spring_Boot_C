@@ -1,5 +1,9 @@
 package com.example.umc9th2.global.config;
 
+import com.example.umc9th2.global.auth.CustomUserDetailsService;
+import com.example.umc9th2.global.auth.JwtAuthFilter;
+import com.example.umc9th2.global.auth.JwtUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,21 +12,23 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final JwtUtil jwtUtil;
+    private final CustomUserDetailsService customUserDetailsService;
+
     private final String[] allowUris = {
-            "/",
             "/sign-up",
+            "/login",
+            "/logout",
             "/swagger-ui/**",
-            "/swagger-ui.html",
             "/swagger-resources/**",
             "/v3/api-docs/**",
-            "/v3/api-docs",
-            "/api-docs/**",
-            "/api-docs",
     };
 
     @Bean
@@ -33,18 +39,18 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .defaultSuccessUrl("/swagger-ui/index.html", true)
-                        .permitAll()
-                )
-                .csrf(AbstractHttpConfigurer::disable)
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
-                        .permitAll()
-                );
+      
+                .formLogin(AbstractHttpConfigurer::disable)
+                .logout(AbstractHttpConfigurer::disable)
+                .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class)
+                .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
+    }
+
+    @Bean
+    public JwtAuthFilter jwtAuthFilter() {
+        return new JwtAuthFilter(jwtUtil, customUserDetailsService);
     }
 
     @Bean

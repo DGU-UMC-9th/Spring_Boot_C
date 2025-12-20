@@ -1,6 +1,7 @@
 package com.example.umc9th2.domain.user.converter;
 
 import com.example.umc9th2.domain.user.dto.req.UserReqDTO;
+import com.example.umc9th2.domain.user.dto.res.UserResDTO;
 import com.example.umc9th2.domain.user.entity.User;
 import com.example.umc9th2.global.auth.enums.Role;
 
@@ -21,6 +22,13 @@ public class UserConverter {
                 .gender(dto.gender())
                 .totalPoints(0)
                 .build();
+    }
+
+    public static UserResDTO.LoginDTO toLoginDTO(User user, String accessToken) {
+        return new UserResDTO.LoginDTO(
+                user.getUserId(),
+                accessToken
+        );
     }
 }
 

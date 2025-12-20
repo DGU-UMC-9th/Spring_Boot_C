@@ -7,5 +7,11 @@ public class UserResDTO {
             String username,
             String email
     ) {}
+
+    // 로그인
+    public record LoginDTO(
+            Long userId,
+            String accessToken
+    ) {}
 }
 

@@ -28,5 +28,13 @@ public class UserReqDTO {
            
             List<Long> preferCategory
     ) {}
+
+    // 로그인
+    public record LoginDTO(
+            @NotBlank
+            String email,
+            @NotBlank
+            String password
+    ) {}
 }
 
