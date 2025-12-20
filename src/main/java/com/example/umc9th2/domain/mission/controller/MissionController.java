@@ -30,4 +30,17 @@ public class MissionController {
                 )
         );
     }
+
+    //특정가게의미션을 조회
+    @GetMapping("/stores/{storeId}")
+    @Operation(summary = "특정 가게의 미션 목록 조회", description = "특정 가게에 등록된 미션 목록을 페이징하여 조회합니다.")
+    public ApiResponse<List<MissionResDTO.MissionList>> getStoreMissions(
+            @PathVariable Long storeId,
+            @ValidPage @RequestParam Integer page
+    ) {
+        Pageable pageable = PageRequest.of(page - 1, 10);
+        Page<com.example.umc9th2.domain.mission.entity.Mission> missionPage = missionService.getStoreMissions(storeId, pageable);
+        List<MissionResDTO.MissionList> result = MissionConverter.toMissionListDTO(missionPage.getContent());
+        return ApiResponse.onSuccess(GeneralSuccessCode.OK, result);
+    }
 }

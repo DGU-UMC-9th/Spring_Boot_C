@@ -10,4 +10,12 @@ public class MissionResDTO {
             Integer rewardPoints,
             String storeName //store 에서 
     ) {}
+    //미션 week 9 
+    public record MissionList(
+        Long missionId,
+        String title,
+        String description,
+        Integer rewardPoints,
+        Boolean isActive
+) {}
 }

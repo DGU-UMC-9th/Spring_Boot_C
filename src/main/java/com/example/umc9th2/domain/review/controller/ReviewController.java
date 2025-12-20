@@ -45,4 +45,16 @@ public class ReviewController {
         ReviewResDTO.CreateReview result = reviewCommandService.createReview(request, userId);
         return ApiResponse.onSuccess(code, result);
     }
+    //작성한 리뷰 목록조회
+    @GetMapping("/my-reviews")
+    @Operation(summary = "내가 작성한 리뷰 목록 조회", description = "특정 사용자가 작성한 리뷰 목록을 페이징하여 조회합니다.")
+    public ApiResponse<List<ReviewResDTO.MyReviewList>> getMyReviews(
+            @RequestParam Long userId,
+            @ValidPage @RequestParam Integer page
+    ) {
+        Pageable pageable = PageRequest.of(page - 1, 10);
+        Page<Review> reviewPage = reviewQueryService.getMyReviews(userId, pageable);
+        List<ReviewResDTO.MyReviewList> result = ReviewConverter.toMyReviewListDTO(reviewPage.getContent());
+        return ApiResponse.onSuccess(GeneralSuccessCode.OK, result);
+    }
 }

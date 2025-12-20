@@ -43,5 +43,10 @@ public class ReviewQueryService {
 
         List<Review> reviewList = reviewRepository.searchReview(builder);
         return reviewList;
+
+        
+    }
+    public Page<Review> getMyReviews(Long userId, Pageable pageable) {
+        return reviewRepository.findByUser_UserId(userId, pageable);
     }
 }

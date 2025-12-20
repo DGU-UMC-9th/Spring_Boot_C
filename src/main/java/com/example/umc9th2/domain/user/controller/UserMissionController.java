@@ -36,4 +36,16 @@ public class UserMissionController {
         UserMissionResDTO.ChallengeMission result = userMissionService.challengeMission(missionId);
         return ApiResponse.onSuccess(code, result);
     }
+    //진행중인 미션목록죄회
+    @GetMapping("/in-progress")
+    @Operation(summary = "내가 진행중인 미션 목록 조회", description = "특정 사용자가 진행중인 미션 목록을 페이징하여 조회합니다.")
+    public ApiResponse<List<MyMissionDTO>> getInProgressMissions(
+            @RequestParam Long userId,
+            @ValidPage @RequestParam Integer page
+    ) {
+        Pageable pageable = PageRequest.of(page - 1, 10);
+        Page<MyMissionDTO> missionPage = userMissionService.getInProgressMissions(userId, pageable);
+        return ApiResponse.onSuccess(GeneralSuccessCode.OK, missionPage.getContent());
+    }
+
 }
