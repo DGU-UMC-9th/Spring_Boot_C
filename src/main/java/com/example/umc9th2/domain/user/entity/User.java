@@ -6,7 +6,10 @@ import com.example.umc9th2.global.BaseEntity;
 import com.example.umc9th2.domain.user.entity.mapping.UserTerm;
 import com.example.umc9th2.domain.user.entity.mapping.UserFood;
 
+import com.example.umc9th2.global.auth.enums.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,13 +22,15 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
     @Column(nullable = false, length = 50)
@@ -36,6 +41,10 @@ public class User extends BaseEntity {
 
     @Column(nullable = false)
     private Integer totalPoints = 0;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = true, length = 10)
@@ -63,4 +72,5 @@ public class User extends BaseEntity {
     public enum Gender {
         남, 여
     }
+
 }

@@ -10,6 +10,7 @@ import com.example.umc9th2.domain.user.converter.UserMissionConverter;
 import com.example.umc9th2.domain.mission.entity.Mission;
 import com.example.umc9th2.domain.mission.repository.MissionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,11 @@ public class UserMissionService {
     public List<MyMissionDTO> getMyMissions(Long userId, Pageable pageable) {
         return userMissionRepository.findMyMissions(userId, pageable);
     }
+    
+    public Page<MyMissionDTO> getInProgressMissions(Long userId, Pageable pageable) {
+        return userMissionRepository.findInProgressMissions(userId, pageable);
+    }
+
 //미션 도전
 
     @Transactional

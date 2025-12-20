@@ -59,4 +59,19 @@ public class ReviewConverter {
                 LocalDateTime.now()
         );
     }
+
+    //내가 작성한 리뷰 DTO 반환해
+    public static List<ReviewResDTO.MyReviewList> toMyReviewListDTO(List<Review> reviewList) {
+        return reviewList.stream()
+                .map(review -> new ReviewResDTO.MyReviewList(
+                        review.getReviewId(),
+                        review.getStore() != null ? review.getStore().getStoreName() : null,
+                        review.getRating(),
+                        review.getContent(),
+                        review.getCreatedAt()
+                ))
+                .toList();
+    }
+
+    
 }

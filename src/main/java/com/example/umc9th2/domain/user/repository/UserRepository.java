@@ -10,6 +10,8 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    Optional<User> findByEmail(String email);
+
     @Query("""
     select new com.example.umc9th2.domain.user.dto.MyPageDTO(
         u.userId,

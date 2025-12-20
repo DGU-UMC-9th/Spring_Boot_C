@@ -2,6 +2,8 @@ package com.example.umc9th2.domain.mission.entity;
 
 import com.example.umc9th2.domain.store.entity.Store;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +13,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder 
 public class Mission {
 
     @Id

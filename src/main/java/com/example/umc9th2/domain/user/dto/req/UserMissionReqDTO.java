@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 public class UserMissionReqDTO {
 
-    // 필요할지도..?
+   
 
 }

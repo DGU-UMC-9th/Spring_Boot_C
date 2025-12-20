@@ -14,7 +14,7 @@ public enum StoreErrorCode implements BaseErrorCode {
             "가게를 찾을 수 없습니다."),
     ;
 
-    private final org.springframework.http.HttpStatus status;
+    private final HttpStatus status;
     private final String code;
     private final String message;
 }

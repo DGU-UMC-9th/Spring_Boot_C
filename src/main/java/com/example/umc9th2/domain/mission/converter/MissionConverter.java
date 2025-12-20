@@ -5,6 +5,8 @@ import com.example.umc9th2.domain.mission.dto.res.MissionResDTO;
 import com.example.umc9th2.domain.mission.entity.Mission;
 import com.example.umc9th2.domain.store.entity.Store;
 
+import java.util.List;
+
 public class MissionConverter {
 
 // DTO -> Entity 변환 (미션 생성)
@@ -29,4 +31,17 @@ public class MissionConverter {
                 mission.getStore().getStoreName()
         );
     }
+
+// 미션목록반환 
+public static List<MissionResDTO.MissionList> toMissionListDTO(List<Mission> missionList) {
+    return missionList.stream()
+            .map(mission -> new MissionResDTO.MissionList(
+                    mission.getMissionId(),
+                    mission.getTitle(),
+                    mission.getDescription(),
+                    mission.getRewardPoints(),
+                    mission.getIsActive()
+            ))
+            .toList();
+}
 }

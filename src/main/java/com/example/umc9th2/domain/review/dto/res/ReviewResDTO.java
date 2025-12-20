@@ -12,4 +12,12 @@ public class ReviewResDTO {
             String storeName,
             LocalDateTime createdAt
     ) {}
+    //내가 작성한 review 목ㄹ곻
+    public record MyReviewList(
+        Long reviewId,
+        String storeName,
+        Integer rating,
+        String content,
+        LocalDateTime createdAt
+) {}
 }
