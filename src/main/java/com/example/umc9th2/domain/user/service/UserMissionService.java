@@ -10,6 +10,7 @@ import com.example.umc9th2.domain.user.converter.UserMissionConverter;
 import com.example.umc9th2.domain.mission.entity.Mission;
 import com.example.umc9th2.domain.mission.repository.MissionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

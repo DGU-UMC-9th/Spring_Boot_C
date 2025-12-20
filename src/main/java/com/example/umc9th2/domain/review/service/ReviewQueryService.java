@@ -1,12 +1,14 @@
 package com.example.umc9th2.domain.review.service;
 
 import com.example.umc9th2.domain.review.dto.res.ReviewSearchDTO;
-import com.example.umc9th2.domain.review.entity.QReview;
 import com.example.umc9th2.domain.review.entity.Review;
+import com.example.umc9th2.domain.review.entity.QReview;
 import com.example.umc9th2.domain.review.repository.ReviewRepository;
 import com.example.umc9th2.domain.store.entity.QStore;
 import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +25,7 @@ public class ReviewQueryService {
         QReview review = QReview.review;
         BooleanBuilder builder = new BooleanBuilder();
 
-        // 동적 쿼리 조건
+      
         if (type.equals("store")) {
             builder.and(review.store.storeName.contains(query));
         }
@@ -34,17 +36,14 @@ public class ReviewQueryService {
 
         if (type.equals("both")) {
             String[] queries = query.split("&");
-            String firstQuery = queries[0];   // storeName
-            String secondQuery = queries[1];  // content 
-
+            String firstQuery = queries[0];  
+            String secondQuery = queries[1];  
             builder.and(review.store.storeName.contains(firstQuery));
             builder.and(review.content.contains(secondQuery));
         }
 
         List<Review> reviewList = reviewRepository.searchReview(builder);
         return reviewList;
-
-        
     }
     public Page<Review> getMyReviews(Long userId, Pageable pageable) {
         return reviewRepository.findByUser_UserId(userId, pageable);

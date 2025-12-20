@@ -5,6 +5,8 @@ import com.example.umc9th2.domain.mission.dto.res.MissionResDTO;
 import com.example.umc9th2.domain.mission.entity.Mission;
 import com.example.umc9th2.domain.store.entity.Store;
 
+import java.util.List;
+
 public class MissionConverter {
 
 // DTO -> Entity 변환 (미션 생성)

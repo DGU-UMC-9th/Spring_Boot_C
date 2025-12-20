@@ -7,6 +7,8 @@ import com.example.umc9th2.domain.mission.converter.MissionConverter;
 import com.example.umc9th2.domain.store.entity.Store;
 import com.example.umc9th2.domain.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,5 +27,9 @@ public class MissionService {
         Mission mission = MissionConverter.toMission(request, store);
 
         return missionRepository.save(mission);
+    }
+
+    public Page<Mission> getStoreMissions(Long storeId, Pageable pageable) {
+        return missionRepository.findByStore_StoreId(storeId, pageable);
     }
 }

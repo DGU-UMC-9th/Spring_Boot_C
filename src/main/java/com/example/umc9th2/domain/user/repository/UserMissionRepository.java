@@ -3,8 +3,10 @@ package com.example.umc9th2.domain.user.repository;
 
 import com.example.umc9th2.domain.user.dto.MyMissionDTO;
 import com.example.umc9th2.domain.user.entity.mapping.UserMission;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
