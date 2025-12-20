@@ -2,7 +2,9 @@ package com.example.umc9th2.domain.review.entity;
 
 import com.example.umc9th2.domain.user.entity.User;
 import com.example.umc9th2.domain.store.entity.Store;
+import com.example.umc9th2.global.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +15,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class Review {
+public class Review extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
